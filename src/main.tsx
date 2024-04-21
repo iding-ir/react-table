@@ -4,9 +4,12 @@ import { App } from "./components/App";
 import "./styles/reset.css";
 import "./styles/fonts.css";
 import "./styles/index.css";
+import { StoreProvider } from "./redux/StoreProvider";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
+    <StoreProvider>
+      <App />
+    </StoreProvider>
   </React.StrictMode>
 );

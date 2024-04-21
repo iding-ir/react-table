@@ -1,7 +1,7 @@
-import { Items } from "../../types/items";
+import { Item } from "../../types/items";
 import styles from "./Table.module.scss";
 
-export const Table = ({ items }: { items: Items[] }) => {
+export const Table = ({ items }: { items: Item[] }) => {
   return (
     <div className={styles.container}>
       <table>

@@ -1,4 +1,4 @@
-import { Items } from "../../types/items";
+import { Item } from "../../types/items";
 import { Filter } from "../Filter";
 import { Pagination } from "../Pagination";
 import { SizeSelector } from "../SizeSelector";
@@ -6,7 +6,7 @@ import { Table } from "../Table";
 import { Title } from "../Title";
 import styles from "./AdvancedTable.module.scss";
 
-export const AdvancedTable = ({ items }: { items: Items[] }) => {
+export const AdvancedTable = ({ items }: { items: Item[] }) => {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
