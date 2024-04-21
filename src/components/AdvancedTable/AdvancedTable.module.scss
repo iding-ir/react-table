@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 0.5rem;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+
+    .title {
+      flex-grow: 1;
+    }
+
+    .filter {
+      flex-shrink: 1;
+    }
+  }
+
+  .table {
+    flex-grow: 1;
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    height: 3rem;
+
+    .size {
+      flex-shrink: 1;
+    }
+
+    .pagination {
+      flex-grow: 1;
+    }
+  }
+}
