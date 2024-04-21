@@ -1,6 +1,7 @@
 import {
   selectSections,
   setFilter,
+  setPage,
 } from "../../redux/features/table/tableSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import styles from "./Filter.module.scss";
@@ -11,6 +12,7 @@ export const Filter = () => {
   const sections = useAppSelector(selectSections);
 
   const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setPage(1));
     dispatch(setFilter(event.target.value));
   };
 

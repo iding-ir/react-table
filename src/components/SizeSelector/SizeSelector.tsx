@@ -1,4 +1,4 @@
-import { setSize } from "../../redux/features/table/tableSlice";
+import { setPage, setSize } from "../../redux/features/table/tableSlice";
 import { useAppDispatch } from "../../redux/hooks";
 import styles from "./SizeSelector.module.scss";
 
@@ -6,6 +6,7 @@ export const SizeSelector = () => {
   const dispatch = useAppDispatch();
 
   const onChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(setPage(1));
     dispatch(setSize(Number(event.target.value)));
   };
 

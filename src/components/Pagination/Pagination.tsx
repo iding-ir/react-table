@@ -3,15 +3,21 @@ import Prev from "./prev.svg?react";
 import Next from "./next.svg?react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
+  selectFilteredItems,
   selectCanPaginateNext,
   selectCanPaginatePrev,
   selectPage,
+  selectSize,
   setPage,
 } from "../../redux/features/table/tableSlice";
+import { getFirstItemIndex, getlastItemIndex } from "../../methods";
 
 export const Pagination = () => {
   const dispatch = useAppDispatch();
   const page = useAppSelector(selectPage);
+  const availableItems = useAppSelector(selectFilteredItems);
+  const size = useAppSelector(selectSize);
+
   const canPaginatePrev = useAppSelector(selectCanPaginatePrev);
   const canPaginateNext = useAppSelector(selectCanPaginateNext);
 
@@ -33,7 +39,13 @@ export const Pagination = () => {
 
   return (
     <div className={styles.container}>
-      <span className={styles.page}>1-10 of 30</span>
+      <span className={styles.page}>
+        {`${getFirstItemIndex(page, size)}-${getlastItemIndex(
+          page,
+          size,
+          availableItems
+        )} of ${availableItems.length}`}
+      </span>
 
       <button
         className={styles.button}
