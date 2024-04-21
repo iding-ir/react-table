@@ -6,14 +6,14 @@ export interface TableSliceState {
   items: Item[];
   size: number;
   page: number;
-  filter: string | null;
+  filter: string;
 }
 
 const initialState: TableSliceState = {
   items: [],
   size: 10,
   page: 1,
-  filter: null,
+  filter: "",
 };
 
 export const tableSlice = createAppSlice({
@@ -35,16 +35,26 @@ export const tableSlice = createAppSlice({
   }),
 
   selectors: {
-    selectItems: (table) => table.items,
-    selectCurrentItems: ({ items, size, page }) =>
-      items.slice((page - 1) * size, page * size),
-    selectSize: (table) => table.size,
-    selectPage: (table) => table.page,
+    selectItems: ({ items }) => items,
+    selectCurrentItems: ({ items, size, page, filter }) =>
+      (filter ? items.filter((item) => item.section === filter) : items).slice(
+        (page - 1) * size,
+        page * size
+      ),
+    selectSize: ({ size }) => size,
+    selectPage: ({ page }) => page,
     selectCanPaginatePrev: ({ page }) => page > 1,
-    selectCanPaginateNext: ({ page, items, size }) =>
-      page < Math.ceil(items.length / size),
+    selectCanPaginateNext: ({ page, items, size, filter }) =>
+      page <
+      Math.ceil(
+        (filter ? items.filter((item) => item.section === filter) : items)
+          .length / size
+      ),
     selectTotalPages: ({ items, size }) => Math.ceil(items.length / size),
-    selectFilter: (table) => table.filter,
+    selectFilter: ({ filter }) => filter,
+    selectSections: ({ items }) => [
+      ...new Set(items.map((item) => item.section)),
+    ],
   },
 });
 
@@ -59,4 +69,5 @@ export const {
   selectCanPaginateNext,
   selectTotalPages,
   selectFilter,
+  selectSections,
 } = tableSlice.selectors;
