@@ -3,47 +3,53 @@ import Prev from "./prev.svg?react";
 import Next from "./next.svg?react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
+  selectCanPaginateNext,
+  selectCanPaginatePrev,
   selectPage,
-  selectTotalPages,
   setPage,
 } from "../../redux/features/table/tableSlice";
 
 export const Pagination = () => {
   const dispatch = useAppDispatch();
   const page = useAppSelector(selectPage);
-  const totalPages = useAppSelector(selectTotalPages);
+  const canPaginatePrev = useAppSelector(selectCanPaginatePrev);
+  const canPaginateNext = useAppSelector(selectCanPaginateNext);
 
   const handlePrev = () => {
-    const prevPage = page - 1;
-
-    if (prevPage < 1) {
+    if (!canPaginatePrev) {
       return;
     }
 
-    dispatch(setPage(prevPage));
+    dispatch(setPage(page - 1));
   };
 
   const handleNext = () => {
-    const nextPage = page + 1;
-
-    if (nextPage > totalPages) {
+    if (!canPaginateNext) {
       return;
     }
 
-    dispatch(setPage(nextPage));
+    dispatch(setPage(page + 1));
   };
 
   return (
     <div className={styles.container}>
       <span className={styles.page}>1-10 of 30</span>
 
-      <i className={styles.button} onClick={handlePrev}>
+      <button
+        className={styles.button}
+        disabled={!canPaginatePrev}
+        onClick={handlePrev}
+      >
         <Prev />
-      </i>
+      </button>
 
-      <i className={styles.button} onClick={handleNext}>
+      <button
+        className={styles.button}
+        disabled={!canPaginateNext}
+        onClick={handleNext}
+      >
         <Next />
-      </i>
+      </button>
     </div>
   );
 };

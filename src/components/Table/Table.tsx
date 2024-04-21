@@ -19,8 +19,8 @@ export const Table = ({ items }: { items: Item[] }) => {
             <tr key={item.id}>
               <td>{item.name}</td>
               <td>{item.section}</td>
-              <td>${item.price.toFixed(2)}</td>
-              <td>{item.weight} lb</td>
+              <td>{item.price.toFixed(2)} €</td>
+              <td>{item.weight * 1000}g</td>
             </tr>
           ))}
         </tbody>

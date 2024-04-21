@@ -40,6 +40,9 @@ export const tableSlice = createAppSlice({
       items.slice((page - 1) * size, page * size),
     selectSize: (table) => table.size,
     selectPage: (table) => table.page,
+    selectCanPaginatePrev: ({ page }) => page > 1,
+    selectCanPaginateNext: ({ page, items, size }) =>
+      page < Math.ceil(items.length / size),
     selectTotalPages: ({ items, size }) => Math.ceil(items.length / size),
     selectFilter: (table) => table.filter,
   },
@@ -52,6 +55,8 @@ export const {
   selectCurrentItems,
   selectSize,
   selectPage,
+  selectCanPaginatePrev,
+  selectCanPaginateNext,
   selectTotalPages,
   selectFilter,
 } = tableSlice.selectors;
